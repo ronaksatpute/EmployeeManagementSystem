@@ -1,2 +1,40 @@
-<h1 class="text-center">{{ title() }}</h1>
-<router-outlet></router-outlet>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand fw-bold" routerLink="/employees">
+      {{ title() }}
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/employees">Employees</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/create-employee">Add Employee</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-4 mb-5">
+  <router-outlet></router-outlet>
+</div>
+
+<footer class="bg-dark text-white text-center py-3 mt-auto">
+  <div class="container">
+    <span>© 2026 Employee Management System</span>
+  </div>
+</footer>
