@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { Employee } from '../employee';
 import { EmployeeService } from '../employee-service';
 
@@ -13,7 +14,10 @@ import { EmployeeService } from '../employee-service';
 export class EmployeeListComponent implements OnInit {
   employees: Employee[] = [];
 
-  constructor(private readonly employeeService: EmployeeService) {}
+  constructor(
+    private readonly employeeService: EmployeeService,
+    private readonly router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getEmployees();
@@ -22,12 +26,26 @@ export class EmployeeListComponent implements OnInit {
   private getEmployees(): void {
     this.employeeService.getEmployeeList().subscribe({
       next: (data) => {
-        console.log('Employees loaded:', data);
         this.employees = data;
       },
       error: (error) => {
         console.error('Error fetching employees:', error);
       }
     });
+  }
+
+  deleteEmployee(id: number): void {
+    this.employeeService.deleteEmployee(id).subscribe({
+      next: () => {
+        this.getEmployees();
+      },
+      error: (error) => {
+        console.error('Error deleting employee:', error);
+      }
+    });
+  }
+
+  updateEmployee(id: number): void {
+    this.router.navigate(['update-employee', id]);
   }
 }
