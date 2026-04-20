@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+# Removed due to size
 oracleJdk-26.jdk/
 
 ### STS ###
