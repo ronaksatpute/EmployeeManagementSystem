@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Employee } from '../employee';
+import { EmployeeService } from '../employee-service';
 
 @Component({
   selector: 'app-employee-list',
@@ -12,23 +13,21 @@ import { Employee } from '../employee';
 export class EmployeeListComponent implements OnInit {
   employees: Employee[] = [];
 
-  constructor() {}
+  constructor(private readonly employeeService: EmployeeService) {}
 
   ngOnInit(): void {
-    this.employees = [
-      {
-        id: 1,
-        firstName: 'John',
-        lastName: 'Doe',
-        emailId: 'john.doe@example.com'
-      },
-      {
-        id: 2,
-        firstName: 'Jane',
-        lastName: 'Smith',
-        emailId: 'jane.smith@example.com'
-      }
-    ];
+    this.getEmployees();
   }
 
+  private getEmployees(): void {
+    this.employeeService.getEmployeeList().subscribe({
+      next: (data) => {
+        console.log('Employees loaded:', data);
+        this.employees = data;
+      },
+      error: (error) => {
+        console.error('Error fetching employees:', error);
+      }
+    });
+  }
 }
