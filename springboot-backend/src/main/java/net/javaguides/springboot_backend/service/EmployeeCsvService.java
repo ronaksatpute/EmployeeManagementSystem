@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import jakarta.annotation.PostConstruct;
@@ -17,6 +18,7 @@ import net.javaguides.springboot_backend.exception.ResourceNotFoundException;
 import net.javaguides.springboot_backend.model.Employee;
 
 @Service("csvEmployeeService")
+@ConditionalOnProperty(name = "employee.storage.type", havingValue = "csv")
 public class EmployeeCsvService implements EmployeeService {
 
     @Value("${employee.csv.file:data/employees.csv}")

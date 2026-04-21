@@ -3,6 +3,7 @@ package net.javaguides.springboot_backend.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import net.javaguides.springboot_backend.exception.ResourceNotFoundException;
@@ -10,6 +11,7 @@ import net.javaguides.springboot_backend.model.Employee;
 import net.javaguides.springboot_backend.repository.EmployeeRepository;
 
 @Service("jpaEmployeeService")
+@ConditionalOnProperty(name = "employee.storage.type", havingValue = "mysql")
 public class EmployeeJpaService implements EmployeeService {
 
     @Autowired
